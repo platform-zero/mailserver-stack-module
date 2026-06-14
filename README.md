@@ -1,3 +1,23 @@
-# mailserver-stack-module
+# mailserver stack module
 
-Stack module `mailserver` extracted from `sso-stack-generator`.
+- Module id: `mailserver`
+- Module repo: `mailserver-stack-module`
+- Source repo: none declared
+- Lifecycle: `active`
+
+## Owned overlays
+- `stack.compose/mailserver.yml`
+- `stack.config/mailserver`
+
+## Dependencies
+- `stack-foundation`
+
+## Validation
+
+```sh
+./tests/validate.sh
+```
+
+## Lifecycle
+
+`active` modules are expected to keep `stack.module.json`, owned overlays, and `tests/validate.sh` in sync.
