@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "id": "mailserver",
+  "repo": "mailserver-stack-module",
+  "runtimeId": "mailserver",
+  "lifecycle": "active",
+  "dependencies": [
+    "stack-foundation"
+  ],
+  "overlays": [
+    "stack.compose/mailserver.yml",
+    "stack.config/mailserver"
+  ]
+}
