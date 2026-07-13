@@ -19,7 +19,8 @@
     "stack.compose/mailserver.yml",
     "stack.config/mailserver",
     "stack.kotlin/test-runner/src/main/kotlin/org/webservices/testrunner/suites/EmailStackTests.kt",
-    "stack.kotlin/test-runner/src/main/kotlin/org/webservices/testrunner/suites/MailserverCommunicationTests.kt"
+    "stack.kotlin/test-runner/src/main/kotlin/org/webservices/testrunner/suites/MailserverCommunicationTests.kt",
+    "stack.runtime.yaml"
   ],
   "testAssets": []
 }
