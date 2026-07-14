@@ -64,7 +64,7 @@ for i in {1..60}; do
         echo "[mailserver] Services are running, setting up DKIM..."
         break
     fi
-    if [ $i -eq 60 ]; then
+    if [ "$i" -eq 60 ]; then
         echo "[mailserver] WARNING: Services didn't start in time, DKIM setup skipped"
         wait
         exit 0
