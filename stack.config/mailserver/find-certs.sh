@@ -48,7 +48,7 @@ if [ -z "${SSL_CERT_PATH:-}" ] || [ -z "${SSL_KEY_PATH:-}" ]; then
     echo "[mailserver] Required fixes:"
     echo "  1. Ensure Caddy route exists for mail.${DOMAIN}"
     echo "  2. Verify the stack TLS mode matches the expected certificate source"
-    echo "  3. Check Caddy logs: docker logs caddy"
+    echo "  3. Check Caddy logs: podman logs caddy"
     exit 1
 fi
 
