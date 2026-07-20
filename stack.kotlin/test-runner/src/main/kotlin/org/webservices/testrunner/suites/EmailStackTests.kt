@@ -4,6 +4,7 @@ import io.ktor.client.statement.*
 import io.ktor.http.*
 import org.webservices.testrunner.framework.*
 import java.net.Socket
+import java.net.InetSocketAddress
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.io.PrintWriter
@@ -120,16 +121,16 @@ suspend fun TestRunner.emailStackTests() = suite("Email Stack Tests") {
         val mailParts = endpoints.mailserver.split(":")
         val mailHost = mailParts[0]
 
-        require(25 != 143) { "SMTP and IMAP ports must remain distinct" }
+        require(25 != 993) { "SMTP and secure IMAP ports must remain distinct" }
 
         try {
             Socket(mailHost, 25).use { socket ->
                 socket.isConnected shouldBe true
             }
-            Socket(mailHost, 143).use { socket ->
+            Socket(mailHost, 993).use { socket ->
                 socket.isConnected shouldBe true
             }
-            println("      ✓ SMTP and IMAP ports are reachable on distinct ports")
+            println("      ✓ SMTP and secure IMAP ports are reachable on distinct ports")
         } catch (e: Exception) {
             fail("SMTP/IMAP reachability check failed: ${e.message}")
         }
@@ -149,18 +150,15 @@ suspend fun TestRunner.emailStackTests() = suite("Email Stack Tests") {
         }
     }
 
-    test("Email Stack: IMAP port (143) availability") {
+    test("Email Stack: plaintext IMAP port (143) is not exposed") {
         val mailParts = endpoints.mailserver.split(":")
         val mailHost = mailParts[0]
 
-        try {
-            Socket(mailHost, 143).use { socket ->
-                socket.isConnected shouldBe true
-                println("      ✓ IMAP port 143 is accessible")
-            }
-        } catch (e: Exception) {
-            fail("IMAP port 143 is not accessible: ${e.message}")
-        }
+        val plaintextImapReachable = runCatching {
+            Socket().use { socket -> socket.connect(InetSocketAddress(mailHost, 143), 2000) }
+        }.isSuccess
+        require(!plaintextImapReachable) { "Plaintext IMAP port 143 must not be exposed" }
+        println("      ✓ Plaintext IMAP port 143 is not exposed")
     }
 
     test("Email Stack: Secure IMAP (993) availability") {
