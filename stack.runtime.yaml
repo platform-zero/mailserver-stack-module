@@ -78,7 +78,7 @@ services:
     - "8.8.4.4"
     resources:
       limits:
-        memory: "${MAILSERVER_MEMORY_LIMIT:-3G}"
+        memory: "${MAILSERVER_MEMORY_LIMIT:-4G}"
         cpus: "${MAILSERVER_CPU_LIMIT:-2.0}"
 networks: {}
 volumes: {}
