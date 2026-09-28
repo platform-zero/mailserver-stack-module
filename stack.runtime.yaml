@@ -49,6 +49,7 @@ services:
         - "mail.${DOMAIN}"
     volumes:
     - "mailserver_data:/var/mail/"
+    - "mailserver_rspamd:/tmp/docker-mailserver/rspamd"
     - "/etc/localtime:/etc/localtime:ro"
     - "caddy_certs:/caddy-certs:ro"
     - "./configs/mailserver/find-certs.sh:/tmp/docker-mailserver/find-certs.sh:ro"
