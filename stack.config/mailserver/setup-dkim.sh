@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # Keep the key and signing configuration stable across container restarts.
-domain="${MAIL_DOMAIN:-${DOMAIN:?DOMAIN must be set}}"
+domain="${DOMAIN:?DOMAIN must be set}"
 base="/tmp/docker-mailserver/rspamd"
 private_key="${base}/dkim/rsa-2048-mail-${domain}.private.txt"
 signing_config="${base}/override.d/dkim_signing.conf"
