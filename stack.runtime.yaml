@@ -49,6 +49,7 @@ services:
         - "mail.${DOMAIN}"
     volumes:
     - "mailserver_data:/var/mail/"
+    - "mailserver_rspamd:/tmp/docker-mailserver/rspamd"
     - "/etc/localtime:/etc/localtime:ro"
     - "caddy_certs:/caddy-certs:ro"
     - "./configs/mailserver/find-certs.sh:/tmp/docker-mailserver/find-certs.sh:ro"
@@ -78,7 +79,9 @@ services:
     - "8.8.4.4"
     resources:
       limits:
-        memory: "${MAILSERVER_MEMORY_LIMIT:-3G}"
+        memory: "${MAILSERVER_MEMORY_LIMIT:-4G}"
         cpus: "${MAILSERVER_CPU_LIMIT:-2.0}"
 networks: {}
-volumes: {}
+volumes:
+  mailserver_rspamd:
+    hostPath: "${STACK_VOLUME_ROOT}/mailserver_rspamd"
