@@ -6,12 +6,12 @@ MAIL_DOMAIN="mail.${DOMAIN}"
 
 # Caddy stores certs in /certs/certificates/ (named volume caddy_certs)
 # Mailserver mounts this as /caddy-certs.
-# We currently default to Caddy local PKI for clean-stack iteration and only
-# switch to ACME when explicitly configured to do so.
+# Prefer a publicly trusted certificate for direct SMTP/IMAP connections.
+# The local Caddy certificate remains a fallback until ACME issuance succeeds.
 CERT_KEY_PAIRS=(
-    "/caddy-certs/certificates/local/${MAIL_DOMAIN}/${MAIL_DOMAIN}.crt|/caddy-certs/certificates/local/${MAIL_DOMAIN}/${MAIL_DOMAIN}.key"
     "/caddy-certs/certificates/acme-v02.api.letsencrypt.org-directory/${MAIL_DOMAIN}/${MAIL_DOMAIN}.crt|/caddy-certs/certificates/acme-v02.api.letsencrypt.org-directory/${MAIL_DOMAIN}/${MAIL_DOMAIN}.key"
     "/caddy-certs/certificates/acme.zerossl.com-v2-dv90/${MAIL_DOMAIN}/${MAIL_DOMAIN}.crt|/caddy-certs/certificates/acme.zerossl.com-v2-dv90/${MAIL_DOMAIN}/${MAIL_DOMAIN}.key"
+    "/caddy-certs/certificates/local/${MAIL_DOMAIN}/${MAIL_DOMAIN}.crt|/caddy-certs/certificates/local/${MAIL_DOMAIN}/${MAIL_DOMAIN}.key"
 )
 
 find_cert_pair() {
