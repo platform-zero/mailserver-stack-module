@@ -25,4 +25,5 @@ cat > /etc/dovecot/conf.d/99-webservices-hardening.conf <<'EOF'
 disable_plaintext_auth = yes
 ssl = required
 EOF
+install -m 0644 /caddy-certs/pki/authorities/local/root.crt /etc/dovecot/caddy-root.crt
 /bin/bash /tmp/docker-mailserver/find-certs.sh

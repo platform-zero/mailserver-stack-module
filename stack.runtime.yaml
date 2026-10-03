@@ -40,6 +40,8 @@ services:
       ENABLE_QUOTAS: 1
       ENABLE_AMAVIS: 0
       POSTFIX_MESSAGE_SIZE_LIMIT: 50000000
+    extraHosts:
+    - "keycloak.datamancy.net:host-gateway"
     networks:
       mailserver:
         aliases:
