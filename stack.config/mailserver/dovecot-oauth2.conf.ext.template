@@ -1,7 +1,9 @@
 # Authenticate mail OAuth tokens against Keycloak's audience-restricted
 # introspection endpoint through the private Caddy route.
 introspection_mode = post
-introspection_url = https://p0-mail:{{P0_MAIL_OAUTH_SECRET}}@keycloak.datamancy.net/realms/webservices/protocol/openid-connect/token/introspect
+introspection_url = https://keycloak.datamancy.net/realms/webservices/protocol/openid-connect/token/introspect
+client_id = p0-mail
+client_secret = {{P0_MAIL_OAUTH_SECRET}}
 username_attribute = email
 active_attribute = active
 active_value = true

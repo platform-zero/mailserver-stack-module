@@ -50,6 +50,7 @@ services:
         aliases:
         - "mail.${DOMAIN}"
     volumes:
+    - "mailserver_config:/tmp/docker-mailserver/"
     - "mailserver_data:/var/mail/"
     - "mailserver_rspamd:/tmp/docker-mailserver/rspamd"
     - "/etc/localtime:/etc/localtime:ro"
@@ -85,5 +86,7 @@ services:
         cpus: "${MAILSERVER_CPU_LIMIT:-2.0}"
 networks: {}
 volumes:
+  mailserver_config:
+    hostPath: "/mnt/stack/volumes/mailserver_config"
   mailserver_rspamd:
     hostPath: "/mnt/stack/volumes/mailserver_rspamd"
