@@ -9,7 +9,7 @@ ensure_mail_account() {
         return 0
     fi
 
-    if setup email list 2>/dev/null | awk '{print $1}' | grep -Fxiq "$email"; then
+    if setup email list 2>/dev/null | awk '$1 == "*" {print $2}' | grep -Fxiq "$email"; then
         setup email update "$email" "$password" >/dev/null
     else
         setup email add "$email" "$password" >/dev/null
