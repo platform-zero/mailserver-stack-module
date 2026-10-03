@@ -1,8 +1,10 @@
-# Dovecot OAuth2 configuration for IMAP/SMTP access via Keycloak OIDC.
-#
-# The userinfo endpoint includes the email claim used for IMAP/SMTP login
-# and avoids embedding a client secret in the Dovecot config.
-
-introspection_mode = auth
-introspection_url = http://keycloak:8080/realms/webservices/protocol/openid-connect/userinfo
+# Authenticate mail OAuth tokens against Keycloak's audience-restricted
+# introspection endpoint through the private Caddy route.
+introspection_mode = post
+introspection_url = https://keycloak.datamancy.net/realms/webservices/protocol/openid-connect/token/introspect
+client_id = p0-mail
+client_secret = {{P0_MAIL_OAUTH_SECRET}}
 username_attribute = email
+active_attribute = active
+active_value = true
+tls_ca_cert_file = /etc/dovecot/caddy-root.crt
