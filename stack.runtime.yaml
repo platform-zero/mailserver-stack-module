@@ -85,8 +85,4 @@ services:
         memory: "${MAILSERVER_MEMORY_LIMIT:-4G}"
         cpus: "${MAILSERVER_CPU_LIMIT:-2.0}"
 networks: {}
-volumes:
-  mailserver_config:
-    hostPath: "${STACK_VOLUME_ROOT}/mailserver_config"
-  mailserver_rspamd:
-    hostPath: "${STACK_VOLUME_ROOT}/mailserver_rspamd"
+volumes: {}
